@@ -7,6 +7,7 @@ let package = Package(
   platforms: [.iOS(.v17), .macOS(.v14), .tvOS(.v17), .watchOS(.v10)],
   products: [
     .library(name: "SimpleSwiftData", targets: ["SimpleSwiftData"]),
+    .library(name: "SimpleSwiftDataMacros", targets: ["SimpleSwiftDataMacros"]),
   ],
   dependencies: [
     // IMPORTANT: set the tag to the SwiftSyntax release that matches your Swift 6.2 toolchain.
