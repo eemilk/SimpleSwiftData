@@ -10,13 +10,14 @@ let package = Package(
     .library(name: "SimpleSwiftDataMacros", targets: ["SimpleSwiftDataMacros"]),
   ],
   dependencies: [
-    // IMPORTANT: set the tag to the SwiftSyntax release that matches your Swift 6.2 toolchain.
     .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "509.0.0")
   ],
   targets: [
     .target(
       name: "SimpleSwiftData",
-      dependencies: ["SimpleSwiftDataMacros"]
+      dependencies: [
+        .target(name: "SimpleSwiftDataMacros")
+      ]
     ),
     .macro(
       name: "SimpleSwiftDataMacros",
