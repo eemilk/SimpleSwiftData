@@ -14,7 +14,7 @@ enum MacroErr: Error, CustomStringConvertible {
     var description: String { "@SimpleModel can only be applied to class declarations." }
 }
 
-extension SimpleModel {
+extension SimpleModel: MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
         providingMembersOf declaration: some DeclGroupSyntax,

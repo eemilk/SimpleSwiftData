@@ -13,7 +13,7 @@ import Foundation
 /// Example:
 /// @SimpleModel
 /// @Model final class Item { ... }
-public struct SimpleModel: MemberMacro {}
+public struct SimpleModel {}
 
 /// Freestanding macro you call once per file that contains models:
 /// let schema: Schema = #AutoSchema()
