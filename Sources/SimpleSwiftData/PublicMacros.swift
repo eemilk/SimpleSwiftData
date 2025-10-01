@@ -6,6 +6,7 @@
 //
 
 import SwiftData
+import SwiftSyntaxMacros
 
 @attached(member, names: named(__autoRegistration))
 public macro SimpleSwiftDataModel() =

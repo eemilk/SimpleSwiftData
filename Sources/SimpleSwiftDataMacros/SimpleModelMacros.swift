@@ -9,17 +9,20 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-enum MacroErr: Error, CustomStringConvertible { case notOnClass
+enum MacroErr: Error, CustomStringConvertible {
+    case notOnClass
     var description: String { "@SimpleModel can only be applied to class declarations." }
 }
 
-extension SimpleModel {
+extension SimpleModel: MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
-        providingMembersOf decl: some DeclSyntaxProtocol,
+        providingMembersOf declaration: some DeclGroupSyntax,
         in context: some MacroExpansionContext
     ) throws -> [DeclSyntax] {
-        guard let classDecl = decl.as(ClassDeclSyntax.self) else { throw MacroErr.notOnClass }
+        guard let classDecl = declaration.as(ClassDeclSyntax.self) else {
+            throw MacroErr.notOnClass
+        }
         let typeName = classDecl.name.text
         return [
             """
@@ -30,7 +33,7 @@ extension SimpleModel {
     }
 }
 
-extension AutoSchemaMacro: FreestandingMacro {
+extension AutoSchemaMacro: ExpressionMacro {
     public static func expansion(
         of node: some FreestandingMacroExpansionSyntax,
         in context: some MacroExpansionContext
