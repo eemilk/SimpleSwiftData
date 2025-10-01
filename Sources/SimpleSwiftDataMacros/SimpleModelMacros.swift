@@ -15,7 +15,27 @@ enum MacroErr: Error, CustomStringConvertible {
 }
 
 extension SimpleModel: MemberMacro {
+    // Primary modern signature (Swift 6+)
     public static func expansion(
+        of node: AttributeSyntax,
+        providingMembersOf declaration: some DeclGroupSyntax,
+        in context: some MacroExpansionContext
+    ) throws -> [DeclSyntax] {
+        try expansionCore(of: node, providingMembersOf: declaration, in: context)
+    }
+
+    // Optional compatibility variant some toolchains may call
+    public static func expansion(
+        of node: AttributeSyntax,
+        providingMembersOf declaration: some DeclGroupSyntax,
+        conformingTo protocols: [TypeSyntax],
+        in context: some MacroExpansionContext
+    ) throws -> [DeclSyntax] {
+        try expansionCore(of: node, providingMembersOf: declaration, in: context)
+    }
+
+    // Shared implementation
+    private static func expansionCore(
         of node: AttributeSyntax,
         providingMembersOf declaration: some DeclGroupSyntax,
         in context: some MacroExpansionContext
